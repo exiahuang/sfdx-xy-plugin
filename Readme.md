@@ -10,11 +10,29 @@ sfdx xy:auth:username:login -u username -p password -a alias -r instanceurl
 
 # install
 
+## Install as plugin
+
 ```sh
+# install
+sfdx plugins:install sfdx-xy-plugin
+
+# show plugin
+sfdx plugins
+
+# run
+sfdx xy:auth:username:login --help
+```
+
+## Install from source
+
+```sh
+git clone https://github.com/exiahuang/sfdx-xy-plugin.git
+cd sfdx-xy-plugin
+npm install
 sfdx plugins:link .
 ```
 
-just run it
+## just run it
 
 ```
 ./bin/run xy:auth:username:login
