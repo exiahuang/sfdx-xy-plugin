@@ -23,13 +23,12 @@ export default class Deploy extends SfdxCommand {
         cwd: flags.string({ char: 'c', description: 'current working directory', default: '.' }),
         nodir: flags.boolean({ char: 'n', description: 'nodir' }),
         sensitive: flags.boolean({ char: 's', description: 'case sensitive'}),
-        execute: flags.boolean({ char: 'e', description: 'execute deploy'}),
+        execute: flags.boolean({ char: 'e', description: 'execute deploy command'}),
     };
 
     protected static requiresUsername = true;
 
     public async run(): Promise<any> {
-        const conn = await this.org.getConnection();
         const options = {
             cwd: this.flags.cwd,
             nocase: !this.flags.sensitive,
@@ -45,11 +44,12 @@ export default class Deploy extends SfdxCommand {
 
         const metafilesStr = metafiles.join(',');
         const command = `sfdx force:source:deploy -p "${metafilesStr}" --json`;
-        console.log('deploy script: \n\t', command);
+        console.log('deploy script: \n\t', command, '\n');
 
         if(this.flags.execute) {
+            const conn = await this.org.getConnection();
             this.ux.startSpinner(`deploy to ${conn.instanceUrl}`);
-            this.ux.setSpinnerStatus(`deploying`);
+            this.ux.setSpinnerStatus(`running`);
             const deployResults = await exec2JSON(command);
             if (deployResults.status === 0) {
                 this.ux.stopSpinner('done');
