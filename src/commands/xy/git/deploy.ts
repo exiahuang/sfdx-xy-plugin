@@ -3,7 +3,7 @@ import { exec2JSON, exec2String } from '../../../libs/execProm';
 import { findMetasByfilename } from '../../../libs/sfutil';
 
 export default class Deploy extends SfdxCommand {
-    public static description = 'deploy metadata from git, default use git diff HEAD';
+    public static description = 'deploy metadata from git, default use git stage file to build sfdx deploy script';
 
     public static examples = [
         'sfdx xy:git:deploy',
@@ -28,12 +28,12 @@ export default class Deploy extends SfdxCommand {
     public async run(): Promise<any> {
         let gitCommand;
         if(this.flags.commitid){
-            gitCommand = `git show --pretty="" --name-only ${this.flags.commitid}`;
+            gitCommand = `git show --diff-filter=ACMT --pretty="" --name-only ${this.flags.commitid}`;
         } else if(this.flags.branch1 && this.flags.branch2 ){
             gitCommand = `git diff --diff-filter=ACMT ${this.flags.branch1}...${this.flags.branch2} --name-only`;
         } else {
             // Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), changed (T), are Unmerged (U)
-            gitCommand = 'git diff HEAD --diff-filter=ACMT --name-only';
+            gitCommand = 'git diff HEAD --diff-filter=ACMT --name-only --cached';
         }
         console.log('git command:\n\t', gitCommand, '\n');
         const res = await exec2String(gitCommand);
