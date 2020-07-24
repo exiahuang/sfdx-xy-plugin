@@ -1,7 +1,7 @@
 {
     "name": "sfdx-xy-plugin",
     "description": "a plugin for sfdx develope",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "exiahuang",
     "bugs": "https://github.com/exiahuang/sfdx-xy-plugin/issues",
     "dependencies": {
@@ -10,6 +10,8 @@
         "@oclif/errors": "^1",
         "@salesforce/command": "^2",
         "@salesforce/core": "^2",
+        "glob": "^7.1.6",
+        "strip-color": "^0.1.0",
         "jsforce": "^1.9.3",
         "tslib": "^1"
     },
