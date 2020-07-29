@@ -4,8 +4,13 @@ import { METADATA_TYPES } from './const';
 
 const isIncludeType = (types: string[]) => (file: string) : boolean => !!(types.find(type => file.includes(`/${type}/`)));
 const isLwcTest = (file: string) : boolean => file.includes('__test__') || file.includes('__tests__');
+const isApexClass = (file: string) : boolean => file.endsWith('.cls');
 const isMetaData = isIncludeType(METADATA_TYPES);
 const isLightingMeta = isIncludeType(['lwc', 'aura']);
+const isTestClass = (file: string) : boolean => {
+    const content = fs.readFileSync(file, {encoding: 'utf-8'});
+    return content.includes('@isTest');
+}
 
 const findMetas = (files: string[]) : string[] => {
     return files.reduce((metas: string[], file: string)=>{
@@ -38,9 +43,23 @@ const findMetasByfilename = (files: string[]) : string[] => {
     }, []);
 }
 
+const findApexClass = (files: string[]) : string[] => {
+    return files.filter(isApexClass);
+}
+
+const findTestClass = (files: string[]) : string[] => {
+    return files.filter(isApexClass).filter(isTestClass);
+}
+
 export {
+    isIncludeType,
+    isLwcTest,
+    isApexClass,
     isMetaData,
     isLightingMeta,
+    isTestClass,
+    findApexClass,
+    findTestClass,
     findMetas,
     findMetasByfilename,
 }
