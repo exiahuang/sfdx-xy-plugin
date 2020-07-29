@@ -2,6 +2,23 @@
 
 a plugin for sfdx develope and [xysfdx](https://github.com/exiahuang/xysfdx)
 
+## Install
+
+Install as sfdx plugin
+
+```sh
+# install
+sfdx plugins:install sfdx-xy-plugin
+
+# show plugin
+sfdx plugins
+
+# run
+sfdx xy:auth:username:login --help
+```
+
+# Usage
+
 ## use Username-Password OAuth Authentication
 
 ```sh
@@ -128,21 +145,32 @@ EXAMPLES
   sfdx xy:retrieve -k hello*.cls -d force-app -e -s
 ```
 
+## bulk apex test runner
 
-# install
-
-## Install as plugin
-
-```sh
-# install
-sfdx plugins:install sfdx-xy-plugin
-
-# show plugin
-sfdx plugins
-
-# run
-sfdx xy:auth:username:login --help
+USAGE
 ```
+  $ sfdx xy:test:run -k <string> [-d <string>] [-s] [-e] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+```
+
+OPTIONS
+```
+  -d, --directory=directory                                                         [default: force-app] root directory
+  -e, --execute                                                                     execute apex test command
+  -k, --keyword=keyword                                                             (required) pattern of keyword.
+  -s, --sensitive                                                                   case sensitive
+  -u, --targetusername=targetusername                                               username or alias for the target org; overrides default target org
+  --apiversion=apiversion                                                           override the api version used for api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+```
+
+EXAMPLES
+```
+  sfdx xy:test:run --keyword hello* --execute
+  sfdx xy:test:run -k hello* -e
+```
+
+# For Developer
 
 ## Install from source
 
