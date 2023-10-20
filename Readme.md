@@ -1,6 +1,8 @@
 # sfdx-xy-plugin
 
-a plugin for sfdx develope and [xysfdx](https://github.com/exiahuang/xysfdx)
+- a plugin for sfdx developer
+- [sfdx-password-login](https://github.com/exiahuang/sfdx-password-login)
+- work with vscode-plugin [xysfdx](https://github.com/exiahuang/xysfdx)
 
 ## Install
 
@@ -14,18 +16,23 @@ sfdx plugins:install sfdx-xy-plugin
 sfdx plugins
 
 # run
-sfdx xy:auth:username:login --help
+sfdx xy --help
 ```
 
 # Usage
 
-## use Username-Password OAuth Authentication
+## sobject CURD
 
-```sh
-sfdx xy:auth:username:login -u username -p password -a alias -r instanceurl
+USAGE
+```
+sf xy data create --help
+sf xy data delete --help
+sf xy data update --help
+sf xy data upsert --help
+sf xy data query --help
+sf xy data search --help
+sf xy data q --help
 
-sfdx xy:auth:username:login -u username -p password -a alias -r https://login.salesforce.com/
-sfdx xy:auth:username:login -u username -p password -a alias -r https://test.salesforce.com/
 ```
 
 ## deploy metadata
@@ -190,4 +197,3 @@ sfdx plugins:link .
 # Acknowledgement
 
 -   [Create Your First Salesforce CLI Plugin](https://developer.salesforce.com/blogs/2018/05/create-your-first-salesforce-cli-plugin.html)
--   `src\commands\xy\auth\username\login.ts` is from [wadewegner/sfdx-waw-plugin](https://github.com/wadewegner/sfdx-waw-plugin)

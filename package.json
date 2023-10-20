@@ -1,7 +1,7 @@
 {
     "name": "sfdx-xy-plugin",
     "description": "a plugin for sfdx develope",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "author": "exiahuang",
     "bugs": "https://github.com/exiahuang/sfdx-xy-plugin/issues",
     "dependencies": {
@@ -9,26 +9,27 @@
         "@oclif/config": "^1",
         "@oclif/errors": "^1",
         "@salesforce/command": "^2",
-        "@salesforce/core": "^2",
-        "glob": "^7.1.6",
+        "@salesforce/core": "^5",
+        "glob": "^10.3.10",
         "strip-color": "^0.1.0",
-        "jsforce": "^1.9.3",
-        "tslib": "^1"
+        "ts-stdin": "^1.0.1",
+        "tslib": "^2"
     },
     "devDependencies": {
         "@oclif/dev-cli": "^1",
-        "@oclif/plugin-help": "^2",
-        "@oclif/test": "^1",
-        "@salesforce/dev-config": "1.4.1",
+        "@oclif/plugin-help": "^6",
+        "@oclif/test": "^3",
+        "@salesforce/dev-config": "4.0.1",
         "@types/chai": "^4",
-        "@types/mocha": "^5",
-        "@types/node": "^10",
+        "@types/mocha": "^10",
+        "@types/node": "^20",
         "chai": "^4",
-        "globby": "^8",
-        "mocha": "^5",
-        "nyc": "^14",
-        "ts-node": "^8",
-        "tslint": "^5"
+        "globby": "^13",
+        "mocha": "^10",
+        "nyc": "^15",
+        "ts-node": "^10",
+        "tslint": "^5",
+        "typescript": "^5.2.2"
     },
     "engines": {
         "node": ">=8.0.0"
@@ -50,10 +51,16 @@
         "bin": "sfdx",
         "topics": {
             "xy": {
-                "description": "a plugin for sfdx.",
+                "description": "sfdx plugin by exiahuang.",
                 "subtopics": {
-                    "auth": {
-                        "description": "commands for authorizing an org for use with the Salesforce CLI"
+                    "git": {
+                        "description": "change git diff to sfdx command."
+                    },
+                    "deploy": {
+                        "description": "create deploy command from keywords."
+                    },
+                    "data": {
+                        "description": "salesforce sobject CURD."
                     }
                 }
             }
@@ -68,6 +75,7 @@
         "posttest": "tslint -p test -t stylish",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
         "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-        "version": "oclif-dev readme && git add README.md"
+        "version": "oclif-dev readme && git add README.md",
+        "prettier": "prettier src/**/*.ts -w"
     }
 }
