@@ -5,7 +5,7 @@ export default class XyDataSearch extends SfdxCommand {
 
   public static examples = [
     'sf xy data search --sobject Account --key "Un*"',
-    'sf xy data search -s Account -k "{Un*}"',
+    'sf xy data search -s Account -k "Un*"',
   ];
 
   protected static flagsConfig = {
